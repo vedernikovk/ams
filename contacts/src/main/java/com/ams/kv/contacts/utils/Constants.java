@@ -1,4 +1,4 @@
-package com.ams.kv.utils;
+package com.ams.kv.contacts.utils;
 
 public class Constants {
 	

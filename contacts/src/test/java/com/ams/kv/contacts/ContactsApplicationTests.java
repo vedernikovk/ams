@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.ams.kv.contacts.model.Contact;
 import com.ams.kv.contacts.model.ServiceError;
-import com.ams.kv.utils.Constants;
+import com.ams.kv.contacts.utils.Constants;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class ContactsApplicationTests {

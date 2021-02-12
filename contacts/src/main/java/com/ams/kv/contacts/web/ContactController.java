@@ -25,7 +25,7 @@ import com.ams.kv.contacts.service.ContactDuplicatedException;
 import com.ams.kv.contacts.service.ContactInvalidException;
 import com.ams.kv.contacts.service.ContactNotFoundException;
 import com.ams.kv.contacts.service.ContactService;
-import com.ams.kv.utils.Constants;
+import com.ams.kv.contacts.utils.Constants;
 
 @RestController
 @RequestMapping(Constants.CONTACT_URL)

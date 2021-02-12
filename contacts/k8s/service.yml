@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: contact-app-deployment
+spec:
+    strategy:
+        type: Recreate
+    selector:
+        matchLabels:
+            app: contact
+    replicas: 3
+    template:
+        metadata:
+            name: contact-pod
+            labels:
+                app: contact
+        spec: 
+            containers:
+                - image: contact:latest
+                  imagePullPolicy: IfNotPresent
+                  name: comp
+                  env:
+                      - name: SECURITY_OAUTH2_RESOURCE_JWK_KEYSETURI
+                        value: http://keycloak:8080/auth/realms/contact/protocol/openid-connect/certs
+
+                      - name: SPRING_DATASOURCE_USERNAME
+                        valueFrom:
+                            configMapKeyRef:
+                                name: contact-config
+                                key: CONTACT_POSTGRES_USER
+
+                      - name: SPRING_DATASOURCE_PASSWORD
+                        valueFrom:
+                            secretKeyRef:
+                                name: contact-secret
+                                key: CONTACT_POSTGRES_PASSWORD
+
+                      - name: SPRING_DATASOURCE_URL
+                        value: jdbc:postgresql://contact-db-svc:5432/contacts
+
+                  ports:
+                      - containerPort: 8082
+                        name: health-port
+                        
+                  readinessProbe:
+                      httpGet:
+                          path: /actuator/health
+                          port: health-port
+                      initialDelaySeconds: 30
+                      timeoutSeconds: 5
+                      periodSeconds: 10 
+                      failureThreshold: 3  
+                      successThreshold: 1
+                      
+                  livenessProbe:
+                      httpGet:
+                          path: /actuator/health
+                          port: health-port
+                      initialDelaySeconds: 180
+                      timeoutSeconds: 5
+                      periodSeconds: 60 
+                      failureThreshold: 3  
+                      successThreshold: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: contact-app-svc
+spec:
+    type: NodePort
+    ports:
+        - port: 8082
+          targetPort: 8082
+          nodePort: 30127
+    selector:
+        app: contact
