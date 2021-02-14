@@ -7,11 +7,10 @@
         - Retrieve contact by email
         - Retrieve contact by phone
 
-    Following business rules are enforced (HTTP 400 (bad request) is returned):            
+    Following business rules are enforced (HTTP 400 (bad request) is returned):
         - When we create a new contact or update existing one either email or phone must be presented
         - email address is unique and can't be duplicated
-        - phone number is unique and can't be duplicated
-        
+        - phone number is unique and can't be duplicated        
      
 2) The API is implemented by stateless microservice with SQL storage.
 
