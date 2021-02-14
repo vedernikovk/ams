@@ -24,15 +24,16 @@
     Kubernetes ClusterIP service will provide server-side load balancing.
  
   
-3) In order to access the service endpoint a client should authenticate with an OpenID Connect authentication server, obtain a JWT access token and provide the access token in “Authorization” HTTP header in the form: “Bearer <token value>”
+3) In order to access the service endpoint a client should authenticate with an OpenID Connect authentication server, obtain a JWT access token and provide the access token in “Authorization” HTTP header in the form: “Bearer 'token value'”
 
     The token should be signed with a private key in accordance with RSA-SHA256 schema.
 
-    The microservice will validate token and signature against a public key exposed by OpenID Connect authentication server that issued the token. 
+    The microservice will validate token and signature with a public key exposed by OpenID Connect authentication server that issued the token. 
 
     The public key will be exposed by the authentication server in accordance with JWKS (JSON Web Key Set) spec.
 
-    The microservice should be configured with a property that is URL to JWKS endpoint. (security.oauth2.resource.jwk.key-set-uri)
+    The microservice should be configured with a property that is URL to JWKS endpoint. (security.oauth2.resource.jwk.key-set-uri).
+    
     The user that authenticated with the authentication server should have ‘contact-admin’ role.
 
     Any stateless instance of the microservice can validate JWT token. No sessions needed.
