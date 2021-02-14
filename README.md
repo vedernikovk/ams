@@ -44,7 +44,8 @@
 
     If changes in new version of the microservice are breaking current API contract (consumers have to be changed) then we will expose the new version of microservice on ‘/v2/contacts’ URL. 
 
-    We will have to maintain two versions of contract in the microservice: 
+    We will have to maintain two versions of contract in the microservice
+
         ‘/v1/contacts’ – for an old clients
         ‘/v2/contacts’ – for a new clients.
 
