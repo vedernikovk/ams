@@ -91,7 +91,7 @@ public class ContactController {
             .build()
             .toUri();
         
-		log.debug("Contact added at %s", locationUri);
+		log.debug("Contact added at {}", locationUri);
         
 		var headers = new HttpHeaders();
         headers.setLocation(locationUri);

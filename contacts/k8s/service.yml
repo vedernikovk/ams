@@ -37,6 +37,12 @@ spec:
 
                       - name: SPRING_DATASOURCE_URL
                         value: jdbc:postgresql://contact-db-svc:5432/contacts
+                        
+                      - name: LOGGING_LEVEL_COM_AMS_KV_CONTACTS
+                        valueFrom:
+                            configMapKeyRef:
+                                name: contact-config
+                                key: CONTACT_LOGGING_LEVEL
 
                   ports:
                       - containerPort: 8082

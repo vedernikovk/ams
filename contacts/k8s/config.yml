@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   CONTACT_POSTGRES_USER: postgres
-  CONTACT_LOGGIN_LEVEL: DEBUG
+  CONTACT_LOGGING_LEVEL: DEBUG
     
 kind: ConfigMap
 metadata:

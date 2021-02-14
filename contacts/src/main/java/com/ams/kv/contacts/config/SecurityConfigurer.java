@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.jwk.JwkTokenStor
 import org.springframework.security.web.savedrequest.RequestCacheAwareFilter;
 
 @Configuration
+@ConditionalOnProperty(name="API_AUTH", havingValue="true")
 public class SecurityConfigurer extends ResourceServerConfigurerAdapter {
 	
     @Value("${security.oauth2.resource.jwk.key-set-uri}")
